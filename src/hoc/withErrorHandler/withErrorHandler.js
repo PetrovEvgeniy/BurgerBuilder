@@ -14,12 +14,14 @@ const withErrorHandler = (WrappedComponent, axios) => {
             })
             this.resInterceptor = axios.interceptors.response.use(res => res, error => {
                 this.setState({error:error})
+                
             });
         }
     
         componentWillUnmount() {
-            axios.interceptors.eject(this.reqInterceptor);
-            axios.interceptors.eject(this.resInterceptor);
+            
+            axios.interceptors.request.eject(this.reqInterceptor);
+            axios.interceptors.response.eject(this.resInterceptor);
         }
 
         errorConfirmHandler = () => {
